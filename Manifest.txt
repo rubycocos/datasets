@@ -3,4 +3,11 @@ Manifest.txt
 README.md
 Rakefile
 lib/datafile.rb
+lib/datafile/builder.rb
+lib/datafile/datafile.rb
+lib/datafile/datasets/dataset.rb
+lib/datafile/datasets/football.rb
+lib/datafile/datasets/world.rb
 lib/datafile/version.rb
+test/helper.rb
+test/test_builder.rb

@@ -1,4 +1,4 @@
-
+# encoding: utf-8
 
 require 'logutils'
 
@@ -7,19 +7,11 @@ require 'logutils'
 
 require 'datafile/version'  # let it always go first
 
-
-
-module Datafile
-
-  def self.banner
-    "datafile/#{VERSION} on Ruby #{RUBY_VERSION} (#{RUBY_RELEASE_DATE}) [#{RUBY_PLATFORM}]"
-  end
-
-  def self.root
-    "#{File.expand_path( File.dirname(File.dirname(__FILE__)) )}"
-  end  
-
-end  # module Datafile
+require 'datafile/datasets/dataset'
+require 'datafile/datasets/football'
+require 'datafile/datasets/world'
+require 'datafile/datafile'
+require 'datafile/builder'
 
 
 

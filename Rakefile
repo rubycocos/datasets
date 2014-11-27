@@ -18,7 +18,9 @@ Hoe.spec 'datafile' do
   self.history_file = 'HISTORY.md'
 
   self.extra_deps = [
-    ['logutils' ]
+    ['logutils'],
+    ['textutils'],
+    ['fetcher'],
   ]
 
   self.licenses = ['Public Domain']
@@ -26,6 +28,4 @@ Hoe.spec 'datafile' do
   self.spec_extras = {
    :required_ruby_version => '>= 1.9.2'
   }
-
-
 end
