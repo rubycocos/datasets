@@ -9,6 +9,7 @@ require 'datafile/version'  # let it always go first
 
 require 'datafile/datasets/dataset'
 require 'datafile/datasets/football'
+require 'datafile/datasets/beer'
 require 'datafile/datasets/world'
 require 'datafile/datafile'
 require 'datafile/builder'

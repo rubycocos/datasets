@@ -8,6 +8,21 @@ class Datafile
 
   attr_reader :datasets
 
+
+  ## convenience method - use like Datafile.load_file()
+  def self.load_file( path='./Datafile' )
+    code = File.read_utf8( path )
+    self.load( code )
+  end
+
+  ## another convenience method - use like Datafile.load()
+  def self.load( code )
+    builder = Builder.new
+    builder.instance_eval( code )
+    builder.datafile   # note: return datafile (of course, NOT the builder)
+  end
+
+
   def initialize()
     @datasets = []
   end

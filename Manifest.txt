@@ -5,6 +5,7 @@ Rakefile
 lib/datafile.rb
 lib/datafile/builder.rb
 lib/datafile/datafile.rb
+lib/datafile/datasets/beer.rb
 lib/datafile/datasets/dataset.rb
 lib/datafile/datasets/football.rb
 lib/datafile/datasets/world.rb

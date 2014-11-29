@@ -16,7 +16,9 @@ class Dataset
   end
 
   def remote_zip_url()  # remote zip url
-    "https://github.com/#{@name}/archive/master.zip"
+    ###  note: use http:// for now - lets us use (personal proxy NOT working w/ https) for now
+    ## "https://github.com/#{@name}/archive/master.zip"
+    "http://github.com/#{@name}/archive/master.zip"
   end
 
   def local_zip_name()

@@ -24,6 +24,11 @@ class Builder
   end
 
 
+  def beer( name, opts={} )
+    logger.info( "[builder] add beer-dataset '#{name}'" )
+    @datafile.datasets << BeerDataset.new( name, opts )
+  end
+
   def football( name, opts={} )
     logger.info( "[builder] add football-dataset '#{name}'" )
     @datafile.datasets << FootballDataset.new( name, opts )
