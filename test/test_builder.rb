@@ -32,6 +32,8 @@ EOS
     ## datafile.run
     ## datafile.download
     ## datafile.read
+    
+    datafile.dump
 
     assert true  # if we get here - test success
   end

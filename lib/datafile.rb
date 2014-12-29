@@ -15,6 +15,5 @@ require 'datafile/datafile'
 require 'datafile/builder'
 
 
-
-puts Datafile.banner    # say hello
-
+# say hello
+puts Datafile.banner    if $DEBUG || (defined?($RUBYLIBS_DEBUG) && $RUBYLIBS_DEBUG)
