@@ -12,3 +12,4 @@ lib/datafile/datasets/world.rb
 lib/datafile/version.rb
 test/helper.rb
 test/test_builder.rb
+test/test_dataset_file_registry.rb

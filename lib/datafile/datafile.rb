@@ -43,14 +43,18 @@ class Datafile
   def download
     logger.info( "[datafile] dowload" )
     @datasets.each do |dataset|
-      dataset.download()
+      if dataset.kind_of? DatasetZip
+        dataset.download()
+      else
+        # skip all others
+      end
     end
   end
 
   def download_world   ## only dl world datasets (skip all others)
     logger.info( "[datafile] dowload world datasets" )
     @datasets.each do |dataset|
-      if dataset.kind_of? WorldDataset
+      if dataset.kind_of? WorldZipDataset
         dataset.download()
       else
         # skip all others
@@ -61,7 +65,7 @@ class Datafile
   def download_beer   ## only dl beer datasets (skip all others)
     logger.info( "[datafile] dowload beer datasets" )
     @datasets.each do |dataset|
-      if dataset.kind_of? BeerDataset
+      if dataset.kind_of? BeerZipDataset
         dataset.download()
       else
         # skip all others
@@ -72,7 +76,7 @@ class Datafile
   def download_football   ## only dl football datasets (skip all others)
     logger.info( "[datafile] dowload football datasets" )
     @datasets.each do |dataset|
-      if dataset.kind_of? FootballDataset
+      if dataset.kind_of? FootballZipDataset
         dataset.download()
       else
         # skip all others
@@ -93,7 +97,7 @@ class Datafile
   def read_world
     logger.info( "[datafile] read world datasets" )
     @datasets.each do |dataset|
-      if dataset.kind_of? WorldDataset
+      if dataset.kind_of?( WorldZipDataset ) || dataset.kind_of?( WorldFileDataset )
         dataset.read()
       else
         # skip all others
@@ -104,7 +108,7 @@ class Datafile
   def read_beer
     logger.info( "[datafile] read beer datasets" )
     @datasets.each do |dataset|
-      if dataset.kind_of? BeerDataset
+      if dataset.kind_of?( BeerZipDataset ) || dataset.kind_of?( BeerFileDataset )
         dataset.read()
       else
         # skip all others
@@ -115,7 +119,7 @@ class Datafile
   def read_football
     logger.info( "[datafile] read football datasets" )
     @datasets.each do |dataset|
-      if dataset.kind_of? FootballDataset
+      if dataset.kind_of?( FootballZipDataset ) || dataset.kind_of?( FootballFileDataset )
         dataset.read()
       else
         # skip all others
