@@ -4,6 +4,7 @@ README.md
 Rakefile
 lib/datafile.rb
 lib/datafile/builder.rb
+lib/datafile/builder2.rb
 lib/datafile/datafile.rb
 lib/datafile/datasets/dataset.rb
 lib/datafile/version.rb
@@ -17,8 +18,11 @@ lib/datafile/workers/zip/football.rb
 lib/datafile/workers/zip/worker.rb
 lib/datafile/workers/zip/world.rb
 test/datafile/eurocup.rb
+test/datafile/stadiums.rb
 test/datafile/world.rb
+test/datafile2/at.rb
 test/helper.rb
 test/test_builder.rb
+test/test_builder2.rb
 test/test_file_dataset_registry.rb
 test/test_file_worker.rb

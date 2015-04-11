@@ -23,6 +23,7 @@ require 'datafile/workers/zip/worker'
 
 require 'datafile/datafile'
 require 'datafile/builder'
+require 'datafile/builder2'
 
 
 # say hello

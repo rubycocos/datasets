@@ -2,15 +2,7 @@
 
 module Datafile
 
-class Builder
-
-  include LogUtils::Logging
-
-  attr_reader :datafile
-
-  def initialize()
-    @datafile = Datafile.new
-  end
+class Builder     ## "simple" builder (one file, one datafile)
 
   def self.load_file( path )
     code = File.read_utf8( path )
@@ -23,6 +15,14 @@ class Builder
     builder
   end
 
+
+  include LogUtils::Logging
+
+  def initialize
+    @datafile = Datafile.new
+  end
+
+  attr_reader :datafile
 
   def beer( name, opts={} )
     logger.info( "[builder] add beer-dataset '#{name}'" )

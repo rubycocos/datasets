@@ -24,14 +24,36 @@ class Datafile
   end
 
 
-  def initialize
+  def initialize( opts={} )
+    @opts     = opts
     @datasets = []
 
-    @worker   = ZipWorker.new( self )   ## default to zip worker for now
+    ## (target)name - check: use nil if noname -why, why not?
+    @name = opts[:name] || 'noname'
+    @name = @name.to_s   # note: convert possible symbol to string
+
+    ## to be done - dependencies
+    ## -- @deps = @opts[:deps] # ???? add dependencies ???
+
+    if opts[:file]
+      @worker  = FileWorker.new( self )
+      ## file_opts = opts[:file]  --- why, why not???
+      ## # e.g.  file: { openworld: '../../openmundi', ... }  
+      ## FileDataset.registry.merge( file_opts )   ## note: allows you to passing options (get merged into file worker hash)
+    else
+      ## default to zip worker for now
+      @worker   = ZipWorker.new( self )
+    end
   end
 
   attr_reader   :datasets
+  attr_reader   :name
+
   attr_accessor :worker      # lets you change worker - find a better way - how, why, why not??
+
+  def name
+    @name
+  end
 
 
   def run
