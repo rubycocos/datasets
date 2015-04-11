@@ -25,19 +25,20 @@ class Builder
 
 
   def beer( name, opts={} )
-    logger.info( "[builder] add beer-dataset (zip) '#{name}'" )
-    @datafile.datasets << BeerZipDataset.new( name, opts )
+    logger.info( "[builder] add beer-dataset '#{name}'" )
+    @datafile.datasets << BeerDataset.new( name, opts )
   end
 
   def football( name, opts={} )
-    logger.info( "[builder] add football-dataset (zip) '#{name}'" )
-    @datafile.datasets << FootballZipDataset.new( name, opts )
+    logger.info( "[builder] add football-dataset '#{name}'" )
+    @datafile.datasets << FootballDataset.new( name, opts )
   end
 
   def world( name, opts={} )
-    logger.info( "[builder] add world-dataset (zip) '#{name}'" )
-    @datafile.datasets << WorldZipDataset.new( name, opts )
+    logger.info( "[builder] add world-dataset '#{name}'" )
+    @datafile.datasets << WorldDataset.new( name, opts )
   end
 
 end # class Builder
 end # module Datafile
+

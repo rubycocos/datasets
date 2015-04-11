@@ -8,9 +8,19 @@ require 'logutils'
 require 'datafile/version'  # let it always go first
 
 require 'datafile/datasets/dataset'
-require 'datafile/datasets/football'
-require 'datafile/datasets/beer'
-require 'datafile/datasets/world'
+
+require 'datafile/workers/dataset'
+
+require 'datafile/workers/file/dataset'
+require 'datafile/workers/file/registry'
+require 'datafile/workers/file/worker'
+
+require 'datafile/workers/zip/dataset'
+require 'datafile/workers/zip/beer'
+require 'datafile/workers/zip/football'
+require 'datafile/workers/zip/world'
+require 'datafile/workers/zip/worker'
+
 require 'datafile/datafile'
 require 'datafile/builder'
 

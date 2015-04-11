@@ -34,6 +34,10 @@ EOS
     ## datafile.read
     
     datafile.dump
+    
+    ## change worker (defaults to ZipWorker)
+    datafile.worker = Datafile::FileWorker.new( datafile )
+    datafile.dump
 
     assert true  # if we get here - test success
   end
