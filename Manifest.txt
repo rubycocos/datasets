@@ -17,6 +17,8 @@ lib/datafile/workers/zip/football.rb
 lib/datafile/workers/zip/worker.rb
 lib/datafile/workers/zip/world.rb
 test/datafile/eurocup.rb
+test/datafile/world.rb
 test/helper.rb
 test/test_builder.rb
 test/test_file_dataset_registry.rb
+test/test_file_worker.rb
