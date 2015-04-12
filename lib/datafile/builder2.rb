@@ -30,9 +30,9 @@ class BuilderEx
   attr_reader :datafiles
 
 
-  def data( arg )
+  def task( arg )
 
-    logger.info( "[builder] add data '#{arg.inspect}' : #{arg.class.name}" )
+    logger.info( "[builder] add task '#{arg.inspect}' : #{arg.class.name}" )
 
     if arg.kind_of?( String ) || arg.kind_of?( Symbol )   # e.g. 'at' or :at
       name = arg.to_s
@@ -59,7 +59,12 @@ class BuilderEx
     @datafiles << @datafile
   end
 
+  def calc( &block )
+    logger.info( "[builder] add calc-block" )
+  end
 
+  ################################
+  # "classic/standard" datasets
   def beer( name, opts={} )
     logger.info( "[builder] add beer-dataset '#{name}'" )
     @datafile.datasets << BeerDataset.new( name, opts )
