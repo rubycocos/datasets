@@ -22,9 +22,19 @@ class ZipWorker   ## check: rename to ZipDatafileWorker?? or ZipDatafile  -why, 
     end
   end
 
+  def calc
+    @datafile.scripts.each do |script|
+      script.call
+    end
+  end
+
   def dump
     @datafile.datasets.each do |dataset|
       dataset.zip_worker.dump
+    end
+    ## also dump scripts
+    @datafile.scripts.each do |script|
+      script.dump
     end
   end
 

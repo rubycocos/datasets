@@ -2,10 +2,25 @@
 
 module Datafile
 
-class Datafile
-
+class Script
   include LogUtils::Logging
 
+  def initialize( proc )
+    @proc = proc
+  end
+
+  def call
+    logger.info( "[script] calling calc block" )
+    @proc.call
+  end
+  
+  def dump
+    puts "  script: #{@proc.inspect}"
+  end
+end  ## class Script
+
+
+class Datafile
 
   ## convenience method - use like Datafile.load_file()
   def self.load_file( path='./Datafile' )
@@ -24,22 +39,20 @@ class Datafile
   end
 
 
+  include LogUtils::Logging
+
   def initialize( opts={} )
     @opts     = opts
     @datasets = []
+    @scripts  = []   ## calculation scripts (calc blocks)
 
-    ## (target)name - check: use nil if noname -why, why not?
-    @name = opts[:name] || 'noname'
-    @name = @name.to_s   # note: convert possible symbol to string
-
-    ## to be done - dependencies
-    ## -- @deps = @opts[:deps] # ???? add dependencies ???
+    ## (target)name - return nil if noname (set/defined/assigned)
+    @name  = opts[:name] || nil
+    ## deps (dependencies) - note: always returns an array (empty array if no deps)
+    @deps  = opts[:deps] || []     
 
     if opts[:file]
       @worker  = FileWorker.new( self )
-      ## file_opts = opts[:file]  --- why, why not???
-      ## # e.g.  file: { openworld: '../../openmundi', ... }  
-      ## FileDataset.registry.merge( file_opts )   ## note: allows you to passing options (get merged into file worker hash)
     else
       ## default to zip worker for now
       @worker   = ZipWorker.new( self )
@@ -47,19 +60,18 @@ class Datafile
   end
 
   attr_reader   :datasets
+  attr_reader   :scripts    ## calc(ulation) scripts (calc blocks)
   attr_reader   :name
+  attr_reader   :deps       ## dep(endencies)
 
   attr_accessor :worker      # lets you change worker - find a better way - how, why, why not??
-
-  def name
-    @name
-  end
 
 
   def run
     logger.info( "[datafile] begin - run" )
     download     # step 1 - download zips for datasets
     read         # step 2 - read in datasets from zips
+    calc         # step 3 - run calc(ulations) scripts
     logger.info( "[datafile] end - run" )
   end
 
@@ -73,6 +85,11 @@ class Datafile
   def read
     logger.info( "[datafile] read" )
     @worker.read
+  end
+
+  def calc
+    logger.info( "[datafile] calc" )
+    @worker.calc
   end
 
   def dump

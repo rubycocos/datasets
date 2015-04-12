@@ -38,7 +38,7 @@ class BuilderEx
       name = arg.to_s
       ## note: always default to FileWorker for now
       ##  -- use file: true -- find better name e.g. worker/source: file - why? why not??
-      @datafile = Datafile.new( name: name, file: true )
+      @datafile = Datafile.new( name: name, deps: [], file: true )
       yield  ### execute block in context
        ## b = Builder.new
        ## block.call( b )  ## same as b.instance_eval( &block) ???
@@ -46,10 +46,15 @@ class BuilderEx
        ## b = Builder.load( &block )
     elsif arg.kind_of?( Hash )  ## Hash  e.g. :at_calc => :at etc.
       key   = arg.keys.first
-      ### todo: add deps (from value)
       value = arg[key]   ## todo: check if single value? always turn into array
-      name = key.to_s   ## get first key (assume it's name)
-      @datafile = Datafile.new( name: name, file: true )  ## note: always default to FileWorker for now
+
+      name  = key.to_s   ## get first key (assume it's name)
+      if value.kind_of?( Array )
+        deps = value.map { |v| v.to_s }   ## convert to strings
+      else  ## assume single string/symbol -- convert to array
+        deps = [value.to_s]
+      end
+      @datafile = Datafile.new( name: name, deps: deps, file: true )  ## note: always default to FileWorker for now
       yield   ### execute block in context
       ## to be done
     else
@@ -60,7 +65,8 @@ class BuilderEx
   end
 
   def calc( &block )
-    logger.info( "[builder] add calc-block" )
+    logger.info( "[builder] add script calc-block" )
+    @datafile.scripts << Script.new( block )
   end
 
   ################################
