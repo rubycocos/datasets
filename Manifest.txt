@@ -2,6 +2,7 @@ HISTORY.md
 Manifest.txt
 README.md
 Rakefile
+data/football.txt
 lib/datafile.rb
 lib/datafile/builder.rb
 lib/datafile/builder2.rb
@@ -26,3 +27,4 @@ test/test_builder.rb
 test/test_builder2.rb
 test/test_file_dataset_registry.rb
 test/test_file_worker.rb
+test/test_football_dataset.rb

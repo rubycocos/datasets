@@ -26,6 +26,14 @@ require 'datafile/builder'
 require 'datafile/builder2'
 
 
+module Datafile
+  def self.data_path
+    "#{root}/data"
+  end
+end # module Datafile
+
+
+
 # say hello
 puts Datafile.banner    if defined?($RUBYLIBS_DEBUG) && $RUBYLIBS_DEBUG
 

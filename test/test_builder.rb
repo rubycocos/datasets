@@ -15,12 +15,12 @@ class TestBuilder < MiniTest::Test
 
   world  'openmundi/world.db', setup: 'countries'
 
-  football 'openfootball/national-teams'      ## NOTE: default is setup: 'all'
+  football 'national-teams'      ## NOTE: default is setup: 'all'
   
   ### todo/fix: download archive only once(!!) even if included more than once
-  ## football 'openfootball/world-cup', setup: '2014_quali'
+  ## football 'world-cup', setup: '2014_quali'
 
-  football 'openfootball/world-cup', setup: '2014'
+  football 'world-cup', setup: '2014'
 
 ## more comments
 

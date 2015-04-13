@@ -3,12 +3,12 @@ puts "[eval] self in top = #{self.class.name}"
 
 task :at => :importbuiltin do
   puts "[eval] self in data (enter) = #{self.class.name}"
-  football 'openfootball/at-austria'
+  football 'at-austria'
   puts "[eval] self in data (leave) = #{self.class.name}"
 end
 
 task :at_2014_15 => :importbuiltin do
-  football 'openfootball/at-austria', setup: '2014-15'
+  football 'at-austria', setup: '2014-15'
 end
 
 

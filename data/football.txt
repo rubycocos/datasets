@@ -1,0 +1,45 @@
+##########################################################
+# known football.db (openfootball) datasets (repos)
+
+#####################
+# -- Basics
+
+openfootball/stadiums
+openfootball/players
+openfootball/assocs
+
+##########################
+# -- National Teams
+
+openfootball/national-teams
+
+openfootball/world-cup
+openfootball/euro-cup
+openfootball/africa-cup
+openfootball/north-america-gold-cup
+openfootball/copa-america
+openfootball/confed-cup
+
+#########################
+# -- Clubs
+
+openfootball/clubs
+
+openfootball/eng-england
+openfootball/at-austria
+openfootball/de-deutschland
+openfootball/es-espana
+openfootball/it-italy
+openfootball/fr-france
+openfootball/ch-confoederatio-helvetica
+openfootball/europe-champions-league
+
+openfootball/major-league-soccer
+openfootball/mx-mexico
+openfootball/north-america-champions-league
+
+openfootball/br-brazil
+openfootball/copa-sudamericana
+openfootball/copa-libertadores
+
+openfootball/club-world-cup
