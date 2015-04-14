@@ -13,7 +13,7 @@ class TestBuilder < MiniTest::Test
     code =<<EOS
 ## comments
 
-  world  'openmundi/world.db', setup: 'countries'
+  world  'world.db', setup: 'countries'
 
   football 'national-teams'      ## NOTE: default is setup: 'all'
   

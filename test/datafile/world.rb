@@ -1,3 +1,3 @@
 
-world 'openmundi/world.db', setup: 'countries'
+world 'world.db', setup: 'countries'
 

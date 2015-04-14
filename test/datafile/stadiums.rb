@@ -1,2 +1,3 @@
 
-football 'openfootball/stadiums'   ## NOTE: default is setup: 'all'
+football 'stadiums'   ## NOTE: default is setup: 'all'
+

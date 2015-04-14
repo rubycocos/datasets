@@ -1,6 +1,6 @@
 #####################
 # national teams
 
-football 'openfootball/national-teams'
-football 'openfootball/euro-cup'
+football 'national-teams'
+football 'euro-cup'
 

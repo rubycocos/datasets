@@ -38,7 +38,16 @@ end # class Dataset
 
 
 class WorldDataset < Dataset
-  def initialize( name, opts={} )
+  def initialize( name_easy, opts={} )
+
+    ## check if name include slash (e.g. /)
+    ##  - if not auto-add openmundi/ (default)
+    if name_easy.index( '/' ).nil?
+      name = "openmundi/#{name_easy}"
+    else
+      name = name_easy   ## just pass through for now
+    end
+
     super( name, opts )  ## todo/check: just juse super (e.g. pass along all params - why? why not?)
   end
   
@@ -87,7 +96,16 @@ end # class FootballDataset
 
 
 class BeerDataset < Dataset
-  def initialize( name, opts={} )
+  def initialize( name_easy, opts={} )
+
+    ## check if name include slash (e.g. /)
+    ##  - if not auto-add openbeer/ (default)
+    if name_easy.index( '/' ).nil?
+      name = "openbeer/#{name_easy}"
+    else
+      name = name_easy   ## just pass through for now
+    end
+
     super( name, opts )
   end
 
