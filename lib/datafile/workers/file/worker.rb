@@ -15,6 +15,11 @@ class FileWorker   ## check: rename to FileDatafileWorker?? or FileDatafile  -wh
   end
 
   def read
+    ## note: also run inlines (setup script) before
+    @datafile.inlines.each do |inline|
+      inline.call
+    end
+
     @datafile.datasets.each do |dataset|
       dataset.file_worker.read
     end
@@ -27,6 +32,11 @@ class FileWorker   ## check: rename to FileDatafileWorker?? or FileDatafile  -wh
   end
 
   def dump
+    ## also dump inlines
+    @datafile.inlines.each do |inline|
+      inline.dump
+    end
+
     @datafile.datasets.each do |dataset|
       dataset.file_worker.dump
     end

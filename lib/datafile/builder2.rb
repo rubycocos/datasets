@@ -4,7 +4,7 @@ module Datafile
 
 
 ###
-##  check/todo: ename to BatchBuilder, MultiBuilder,etc - find better name - why, why not??
+##  check/todo: rename to BatchBuilder, MultiBuilder,etc - find better name - why, why not??
 
 class BuilderEx
 

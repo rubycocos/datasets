@@ -17,6 +17,11 @@ class ZipWorker   ## check: rename to ZipDatafileWorker?? or ZipDatafile  -why, 
   end
 
   def read
+    ## note: also run inlines (setup script) before
+    @datafile.inlines.each do |inline|
+      inline.call
+    end
+
     @datafile.datasets.each do |dataset|
       dataset.zip_worker.read
     end
@@ -29,6 +34,10 @@ class ZipWorker   ## check: rename to ZipDatafileWorker?? or ZipDatafile  -why, 
   end
 
   def dump
+    ## also dump inlines
+    @datafile.inlines.each do |inline|
+      inline.dump
+    end
     @datafile.datasets.each do |dataset|
       dataset.zip_worker.dump
     end

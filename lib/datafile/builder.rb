@@ -24,6 +24,16 @@ class Builder     ## "simple" builder (one file, one datafile)
 
   attr_reader :datafile
 
+  ## "special" datasets
+
+  def inline( &block )
+    logger.info( "[builder] add inline script-block" )
+    @datafile.inlines << Inline.new( block )
+  end
+
+
+  ## "classic" standard datasets
+
   def beer( name, opts={} )
     logger.info( "[builder] add beer-dataset '#{name}'" )
     @datafile.datasets << BeerDataset.new( name, opts )
