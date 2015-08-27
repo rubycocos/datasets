@@ -58,7 +58,11 @@ class Datafile
 
     # Note: return datafile (of course, NOT the builder)
     #  if you want a builder use Datafile::Builder ;-)
-    builder.datafile   
+    datafile = builder.datafile
+    ## check for auto-configure (just guessing)
+    ##   zip or file worker
+    datafile.guess_file_or_zip_worker
+    datafile
   end
 
 
@@ -82,6 +86,18 @@ class Datafile
       @worker   = ZipWorker.new( self )
     end
   end
+
+  def guess_file_or_zip_worker   ## change/rename to configure_file_or_zip_worker - why? why not??
+    ## if opts file or zip exists do NOT change (assume set manually)
+    return  if @opts[:file] || @opts[:zip]
+
+    ## for now only change if single (just 1) dataset and it's present
+    if @datasets.size == 1 && @datasets[0].file?
+      puts "  bingo!! assume (in-situ) datafile; use file workers"
+      @worker = FileWorker.new( self )
+    end
+  end
+
 
   attr_reader   :datasets
   attr_reader   :scripts    ## calc(ulation) scripts (calc blocks)
