@@ -21,19 +21,18 @@ class TestFileWorker < MiniTest::Test
     ActiveRecord::Base.establish_connection( adapter:  'sqlite3',
                                              database: ':memory:' )
     SportDb.create_all
-    SportDb.read_builtin
 
     ## change worker (defaults to ZipWorker)
     world_datafile.worker = Datafile::FileWorker.new( world_datafile )
     world_datafile.dump
-    world_datafile.read
+##    world_datafile.read
 
     registry = Datafile::FileDataset.registry
     registry.merge( openfootball: '../../openfootball' )
 
     eurocup_datafile.worker = Datafile::FileWorker.new( eurocup_datafile )
     eurocup_datafile.dump
-    eurocup_datafile.read
+##    eurocup_datafile.read
 
     assert true  # if we get here - test success
   end

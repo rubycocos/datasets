@@ -23,17 +23,9 @@ require 'datafile/workers/zip/worker'
 
 require 'datafile/datafile'
 require 'datafile/builder'
-require 'datafile/builder2'
 
-
-module Datafile
-  def self.data_path
-    "#{root}/data"
-  end
-end # module Datafile
 
 
 
 # say hello
-puts Datafile.banner    if defined?($RUBYLIBS_DEBUG) && $RUBYLIBS_DEBUG
-
+puts Datafile.banner    if defined?($RUBYCOCO_DEBUG) && $RUBYCOCO_DEBUG

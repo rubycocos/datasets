@@ -5,13 +5,8 @@ module Datafile
 class FileDataset < DatasetNode
   ## read dataset from file(system)
 
-  @@registry = nil
-
   def self.registry
-    ## use ||=  why, why not??  - add Registry as nested class, why, why not ??
-    if @@registry.nil?
-      @@registry = FileDatasetRegistry.new
-    end
+    @@registry ||= FileDatasetRegistry.new
     @@registry
   end
 
@@ -19,7 +14,7 @@ class FileDataset < DatasetNode
     super( dataset )
   end
 
-  def repo_dir     ### check: use (rename to) include dir (or local_repo_dir) - why, why not ??? 
+  def repo_dir     ### check: use (rename to) include dir (or local_repo_dir) - why, why not ???
     ## note: for easy testing allow "in situ" datasets
     ##   e.g.  ./ (e.g. mu-mauritius)  is openfootball/mu-mauritius
     ## split name in org/user + project (e.g. openfootball/at-austria)
@@ -41,9 +36,7 @@ class FileDataset < DatasetNode
   end
 
 private
-  def registry    ## convenience method to access "static" shared class variable
-    FileDataset.registry     ## self.registry  not working?? - or self.registry() -why, why not??
-  end
+  def registry()  self.class.registry;  end    ## convenience method to access "static" shared class variable
 end # class FileDataset
 
 
@@ -54,10 +47,11 @@ class FootballFileDataset < FileDataset
     super( dataset )
   end
 
-  def read()
+  def read
     logger.info( "read football-dataset (file) '#{name}', '#{setup}'" )
 
-    SportDb.read_setup( setup, repo_dir )
+    pack = SportDb::Package.new( repo_dir )
+    pack.read( season: setup )   ##  note: pass on (optional) setup arg as season (filter) arg for now
   end
 end # class FootballFileDataset
 
@@ -68,11 +62,12 @@ class WorldFileDataset < FileDataset
     super( dataset )
   end
 
-  def read()
+  def read
     logger.info( "read world-dataset (file) '#{name}', '#{setup}'" )
 
     ## WorldDb.read_setup( 'setups/countries', WORLD_DB_INCLUDE_PATH, skip_tags: true )
-    WorldDb.read_setup( setup, repo_dir, skip_tags: true  )
+    ## WorldDb.read_setup( setup, repo_dir, skip_tags: true  )
+    puts "FIX/TODO - read world dataset -- to be (re)done, sorry!!!"
   end
 end # class WorldFileDataset
 
@@ -85,7 +80,8 @@ class BeerFileDataset < FileDataset
   def read()
     logger.info( "read beer-dataset (file) '#{name}', '#{setup}'" )
 
-    BeerDb.read_setup( setup, repo_dir )
+    ## BeerDb.read_setup( setup, repo_dir )
+    puts "FIX/TODO - read beer dataset -- to be (re)done, sorry!!!"
   end
 end # class BeerFileDataset
 

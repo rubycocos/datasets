@@ -6,7 +6,7 @@
 
 def read_known_datasets( path )
     ary = []
-    lines = File.read( path )  ### fix: use File.read_utf8 ??
+    lines = File.open( path, 'r:utf-8' ).read
     lines.each_line do |line|
       ## skip blank and comments lines
       next   if /^\s*#/ =~ line || /^\s*$/ =~ line
@@ -30,10 +30,9 @@ class Dataset
   attr_reader :name
   attr_reader :opts
 
-  def setup
-    value = @opts[:setup] || 'all'
-    "setups/#{value}"
-  end
+  def setup()   @opts[:setup];           end    ## note: return nil if not found/set
+  def format()  @opts[:format] || 'txt'; end    ## note: assume default is txt (other formats incl. csv) for now - why? wh not?
+
 
   def file?                    # note: use file? (not exit? might use zip? later to check if zip exists? -why? why not?)
     ## hack/convenience shortcut:
@@ -49,7 +48,7 @@ class Dataset
     basename = parts[1]
     ##  e.g.
     ##  ./ (working folder) => at-austria
-    ##  openfootball/at-austria  
+    ##  openfootball/at-austria
     if File.basename( Dir.getwd ) == basename
       puts "  bingo!! working folder >#{basename}< matches dataset"
       true     ## return true
@@ -75,7 +74,7 @@ class WorldDataset < Dataset
 
     super( name, opts )  ## todo/check: just juse super (e.g. pass along all params - why? why not?)
   end
-  
+
   def zip_worker()   WorldZipDataset.new( self );  end   ## check: change (rename) just use zip or use worker_zip?? - why, why not?
   def file_worker()  WorldFileDataset.new( self ); end
 end  # class WorldDataset
@@ -84,14 +83,12 @@ end  # class WorldDataset
 
 class FootballDataset < Dataset
 
-  @@known_football_datasets = nil
+  def self.build_known_datasets
+    read_known_datasets( "#{::Datafile.data_path}/football.txt" )
+  end
 
   def self.known_datasets
-    ## return array of known datasets
-    ### todo/fix - use \\= idiom - why, why not??
-    if @@known_football_datasets.nil?
-      @@known_football_datasets = read_known_datasets( "#{::Datafile.data_path}/football.txt" )
-    end
+    @@known_football_datasets ||= build_known_datasets
     @@known_football_datasets
   end
 
@@ -101,7 +98,11 @@ class FootballDataset < Dataset
     ## check if name include slash (e.g. /)
     ##  - if not auto-add openfootball/ (default)
     if name_easy.index( '/' ).nil?
-      name = "openfootball/#{name_easy}"
+      if opts[:format] == 'csv'
+        name = "footballcsv/#{name_easy}"
+      else
+        name = "openfootball/#{name_easy}"
+      end
     else
       name = name_easy   ## just pass through for now
     end
@@ -109,7 +110,7 @@ class FootballDataset < Dataset
     super( name, opts )
 
     ### check for known datasets; warn: if not known (might be a typo)
-    unless FootballDataset.known_datasets.include?( name )
+    unless self.class.known_datasets.include?( name )
       ## todo: use logger - why, why not??
       puts "*** warn: unknown football dataset '#{name}', typo ???"
     end

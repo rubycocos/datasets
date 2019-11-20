@@ -5,7 +5,7 @@ module Datafile
 class Builder     ## "simple" builder (one file, one datafile)
 
   def self.load_file( path )
-    code = File.read_utf8( path )
+    code = File.open( path, 'r:utf-8' ).read
     self.load( code )
   end
 
@@ -18,32 +18,12 @@ class Builder     ## "simple" builder (one file, one datafile)
 
   include LogUtils::Logging
 
-  ## add models shortcuts/constants if exist
-  ##   todo/check: is there a better way ?
-  ##    e.g. just include in inline section/block - for example?
-  ##    check if already included? and check on load to include?
-  ##     models might not yet be required
-
-  if defined?( WorldDb ) && defined?( WorldDb::Models )
-    include WorldDb::Models
-  else
-    puts "*** sorry; can't include WorldDb::Models; not yet defined (required)"
-  end
-  ## todo/check: also include FootballDb::Models and BeerDb::Models ???
-
 
   def initialize
     @datafile = Datafile.new
   end
 
   attr_reader :datafile
-
-  ## "special" datasets
-
-  def inline( &block )
-    logger.info( "[builder] add inline script-block" )
-    @datafile.inlines << Inline.new( block )
-  end
 
 
   ## "classic" standard datasets
@@ -65,4 +45,3 @@ class Builder     ## "simple" builder (one file, one datafile)
 
 end # class Builder
 end # module Datafile
-
