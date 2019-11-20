@@ -13,7 +13,7 @@ class TestFootballDataset < MiniTest::Test
     pp Datafile::FootballDataset.known_datasets
 
     at   = Datafile::FootballDataset.new( 'at-austria' )
-    at2  = Datafile::FootballDataset.new( 'openfootball/at-austria' ) 
+    at2  = Datafile::FootballDataset.new( 'openfootball/at-austria' )
     xxx  = Datafile::FootballDataset.new( 'xxx' )
     xxx2 = Datafile::FootballDataset.new( 'openfootball/xxx' )
 
@@ -27,7 +27,7 @@ class TestFootballDataset < MiniTest::Test
   ## move to test datasets - why, why not ??
   def test_world
     at   = Datafile::WorldDataset.new( 'austria.db' )
-    at2  = Datafile::WorldDataset.new( 'openmundi/austria.db' ) 
+    at2  = Datafile::WorldDataset.new( 'openmundi/austria.db' )
     xxx  = Datafile::WorldDataset.new( 'xxx' )
     xxx2 = Datafile::WorldDataset.new( 'openmundi/xxx' )
 

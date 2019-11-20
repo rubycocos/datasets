@@ -3,23 +3,25 @@
 module Datafile
 
 
-class ZipDataset < DatasetNode  ### use(rename to) ZipDatasetWorker - why, why not ???
+class ZipDataset   ### use(rename to) ZipDatasetWorker - why, why not ???
   ## read dataset from zip(archive)
 
+  include LogUtils::Logging
+
   def initialize( dataset )
-    super( dataset )
+    @dataset = dataset
   end
 
   def remote_zip_url  # remote zip url
     ###  note: use http:// for now - lets us use (personal proxy NOT working w/ https) for now
-    ## "https://github.com/#{@name}/archive/master.zip"
-    "http://github.com/#{name}/archive/master.zip"
+    ## "https://github.com/#{@dataset.name}/archive/master.zip"
+    "http://github.com/#{@dataset.name}/archive/master.zip"
   end
 
   def local_zip_name
     ### note: replace / in name w/ --I--
     ##  e.g. flatten the filename, that is, do NOT include any folders
-    name.gsub('/', '--I--')   # note: will NOT include/return .zip extension
+    @dataset.name.gsub('/', '--I--')   # note: will NOT include/return .zip extension
   end
 
   def local_zip_root
@@ -32,7 +34,7 @@ class ZipDataset < DatasetNode  ### use(rename to) ZipDatasetWorker - why, why n
 
 
   def download
-    logger.info( "download dataset '#{name}'" )
+    logger.info( "download dataset '#{@dataset.name}'" )
     logger.info( "   from '#{remote_zip_url}'" )
     logger.info( "   to '#{local_zip_path}'..." )
 
@@ -42,7 +44,7 @@ class ZipDataset < DatasetNode  ### use(rename to) ZipDatasetWorker - why, why n
 
   def dump
     ## for debuggin dump dataset (also check if zip exits)
-    puts "dataset '#{name}' opts=#{opts.to_json}"     ## use opts.inspect instead of to_json - why? why not?
+    puts "dataset '#{@dataset.name}' opts=#{@dataset.opts.to_json}"     ## use opts.inspect instead of to_json - why? why not?
     puts "  local '#{local_zip_name}' (#{local_zip_path})"
     if File.exist?( local_zip_path )
       puts "    size: #{File.size(local_zip_path)} bytes"
@@ -51,6 +53,18 @@ class ZipDataset < DatasetNode  ### use(rename to) ZipDatasetWorker - why, why n
     end
     puts "  remote '#{remote_zip_url}'"
   end
+
+  def read
+    if @dataset.is_a?( FootballDataset )
+      logger.info( "read football dataset (file) '#{@dataset.name}', '#{@dataset.setup}'" )
+
+      ## pack = SportDb::ZipPackage.new( local_zip_path )
+      ## pack.read( season: @dataset.setup )   ##  note: pass on (optional) setup arg as season (filter) arg for now
+    else
+      logger.info( "TODO/FIX: read dataset (file) '#{@dataset.name}', '#{@dataset.setup}'; sorry" )
+    end
+  end
+
 
 
 private

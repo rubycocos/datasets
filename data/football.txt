@@ -43,3 +43,14 @@ openfootball/copa-sudamericana
 openfootball/copa-libertadores
 
 openfootball/club-world-cup
+
+
+
+############
+# in csv format
+
+footballcsv/england
+footballcsv/deutschland
+
+## todo/fix: add some more ...
+

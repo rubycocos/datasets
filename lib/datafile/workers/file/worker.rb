@@ -16,13 +16,15 @@ class FileWorker   ## check: rename to FileDatafileWorker?? or FileDatafile  -wh
 
   def read
     @datafile.datasets.each do |dataset|
-      dataset.file_worker.read
+      f = FileDataset.new( dataset )
+      f.read
     end
   end
 
   def dump
     @datafile.datasets.each do |dataset|
-      dataset.file_worker.dump
+      f = FileDataset.new( dataset )
+      f.dump
     end
   end
 

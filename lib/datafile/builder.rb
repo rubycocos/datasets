@@ -18,7 +18,6 @@ class Builder     ## "simple" builder (one file, one datafile)
 
   include LogUtils::Logging
 
-
   def initialize
     @datafile = Datafile.new
   end
@@ -27,7 +26,6 @@ class Builder     ## "simple" builder (one file, one datafile)
 
 
   ## "classic" standard datasets
-
   def beer( name, opts={} )
     logger.info( "[builder] add beer-dataset '#{name}'" )
     @datafile.datasets << BeerDataset.new( name, opts )

@@ -26,18 +26,19 @@ class FileDatasetRegistry
   end
 
   def lookup( name )
-    path, _ = lookup_worker    ## note: ignore error message passed along in return
+    path, _ = lookup_path( name )    ## note: ignore error message passed along in return
     path
   end
 
   def lookup!( name )
-    path, error = lookup_worker
+    path, error = lookup_path( name )
     raise error  if error
     path
   end
 
+
 private
-  def lookup_worker( name )
+  def lookup_path( name )
     ## split name in org/user + project (e.g. openfootball/at-austria)
     parts = name.split( '/' )
     ## check/todo: assert parts == 2 -- why, why not??
@@ -57,7 +58,7 @@ private
     end
 
     ### check for File.directory?( path ) too - why, why not???
-    [path, nil]
+    [path, nil]    ## use go-style returns with error as second argument (as error as value)
   end
 end  # class FileDatasetRegistry
 

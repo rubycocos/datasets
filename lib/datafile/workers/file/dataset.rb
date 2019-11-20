@@ -2,8 +2,11 @@
 
 module Datafile
 
-class FileDataset < DatasetNode
+class FileDataset
   ## read dataset from file(system)
+
+  include LogUtils::Logging
+
 
   def self.registry
     @@registry ||= FileDatasetRegistry.new
@@ -11,14 +14,14 @@ class FileDataset < DatasetNode
   end
 
   def initialize( dataset )
-    super( dataset )
+    @dataset = dataset
   end
 
   def repo_dir     ### check: use (rename to) include dir (or local_repo_dir) - why, why not ???
     ## note: for easy testing allow "in situ" datasets
     ##   e.g.  ./ (e.g. mu-mauritius)  is openfootball/mu-mauritius
     ## split name in org/user + project (e.g. openfootball/at-austria)
-    parts = name.split( '/' )
+    parts = @dataset.name.split( '/' )
 
     basename = parts[1]
     if File.basename( Dir.getwd ) == basename
@@ -26,64 +29,28 @@ class FileDataset < DatasetNode
       return Dir.getwd     ## assume working directory/folder is repo dir
     end
 
-    registry.lookup( name )
+    registry.lookup( @dataset.name )
   end
 
   def dump
     ## for debuggin dump dataset  -- todo (also check if folder exits ??)
-    puts "dataset '#{name}' opts=#{opts.to_json}"     ## use opts.inspect instead of to_json - why? why not?
+    puts "dataset '#{@dataset.name}' opts=#{@dataset.opts.inspect}"     ## use opts.inspect instead of to_json - why? why not?
     puts "  repo-dir '#{repo_dir}'"
   end
+
+  def read
+    if @dataset.is_a?( FootballDataset )
+      logger.info( "read football dataset (file) '#{@dataset.name}', '#{@dataset.setup}'" )
+
+      ## pack = SportDb::DirPackage.new( repo_dir )
+      ## pack.read( season: @dataset.setup )   ##  note: pass on (optional) setup arg as season (filter) arg for now
+    else
+      logger.info( "TODO/FIX: read dataset (file) '#{@dataset.name}', '#{@dataset.setup}'; sorry" )
+    end
+  end
+
 
 private
   def registry()  self.class.registry;  end    ## convenience method to access "static" shared class variable
 end # class FileDataset
-
-
-
-class FootballFileDataset < FileDataset
-
-  def initialize( dataset )
-    super( dataset )
-  end
-
-  def read
-    logger.info( "read football-dataset (file) '#{name}', '#{setup}'" )
-
-    pack = SportDb::Package.new( repo_dir )
-    pack.read( season: setup )   ##  note: pass on (optional) setup arg as season (filter) arg for now
-  end
-end # class FootballFileDataset
-
-
-class WorldFileDataset < FileDataset
-
-  def initialize( dataset )
-    super( dataset )
-  end
-
-  def read
-    logger.info( "read world-dataset (file) '#{name}', '#{setup}'" )
-
-    ## WorldDb.read_setup( 'setups/countries', WORLD_DB_INCLUDE_PATH, skip_tags: true )
-    ## WorldDb.read_setup( setup, repo_dir, skip_tags: true  )
-    puts "FIX/TODO - read world dataset -- to be (re)done, sorry!!!"
-  end
-end # class WorldFileDataset
-
-class BeerFileDataset < FileDataset
-
-  def initialize( dataset )
-    super( dataset )
-  end
-
-  def read()
-    logger.info( "read beer-dataset (file) '#{name}', '#{setup}'" )
-
-    ## BeerDb.read_setup( setup, repo_dir )
-    puts "FIX/TODO - read beer dataset -- to be (re)done, sorry!!!"
-  end
-end # class BeerFileDataset
-
-
 end # module Datafile

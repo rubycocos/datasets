@@ -12,38 +12,22 @@ class ZipWorker   ## check: rename to ZipDatafileWorker?? or ZipDatafile  -why, 
 
   def download
     @datafile.datasets.each do |dataset|
-      dataset.zip_worker.download
+      z = ZipDataset.new( dataset )
+      z.download
     end
   end
 
   def read
-    ## note: also run inlines (setup script) before
-    @datafile.inlines.each do |inline|
-      inline.call
-    end
-
     @datafile.datasets.each do |dataset|
-      dataset.zip_worker.read
-    end
-  end
-
-  def calc
-    @datafile.scripts.each do |script|
-      script.call
+      z = ZipDataset.new( dataset )
+      z.read
     end
   end
 
   def dump
-    ## also dump inlines
-    @datafile.inlines.each do |inline|
-      inline.dump
-    end
     @datafile.datasets.each do |dataset|
-      dataset.zip_worker.dump
-    end
-    ## also dump scripts
-    @datafile.scripts.each do |script|
-      script.dump
+      z = ZipDataset.new( dataset )
+      z.dump
     end
   end
 

@@ -27,9 +27,9 @@ class Dataset
     @opts = opts
   end
 
-  attr_reader :name
-  attr_reader :opts
+  attr_reader :name, :opts
 
+  ## convenience helpers for known opts
   def setup()   @opts[:setup];           end    ## note: return nil if not found/set
   def format()  @opts[:format] || 'txt'; end    ## note: assume default is txt (other formats incl. csv) for now - why? wh not?
 
@@ -74,9 +74,6 @@ class WorldDataset < Dataset
 
     super( name, opts )  ## todo/check: just juse super (e.g. pass along all params - why? why not?)
   end
-
-  def zip_worker()   WorldZipDataset.new( self );  end   ## check: change (rename) just use zip or use worker_zip?? - why, why not?
-  def file_worker()  WorldFileDataset.new( self ); end
 end  # class WorldDataset
 
 
@@ -115,9 +112,6 @@ class FootballDataset < Dataset
       puts "*** warn: unknown football dataset '#{name}', typo ???"
     end
   end
-
-  def zip_worker()   FootballZipDataset.new( self );  end
-  def file_worker()  FootballFileDataset.new( self ); end
 end # class FootballDataset
 
 
@@ -134,9 +128,6 @@ class BeerDataset < Dataset
 
     super( name, opts )
   end
-
-  def zip_worker()   BeerZipDataset.new( self );  end
-  def file_worker()  BeerFileDataset.new( self ); end
 end  # class BeerDataset
 
 
