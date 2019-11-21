@@ -42,8 +42,8 @@ class FileDataset
     if @dataset.is_a?( FootballDataset )
       logger.info( "read football dataset (file) '#{@dataset.name}', '#{@dataset.setup}'" )
 
-      ## pack = SportDb::DirPackage.new( repo_dir )
-      ## pack.read( season: @dataset.setup )   ##  note: pass on (optional) setup arg as season (filter) arg for now
+      pack = SportDb::DirPackage.new( repo_dir )
+      pack.read( season: @dataset.setup )   ##  note: pass on (optional) setup arg as season (filter) arg for now
     else
       logger.info( "TODO/FIX: read dataset (file) '#{@dataset.name}', '#{@dataset.setup}'; sorry" )
     end

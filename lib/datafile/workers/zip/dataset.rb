@@ -3,7 +3,7 @@
 module Datafile
 
 
-class ZipDataset   ### use(rename to) ZipDatasetWorker - why, why not ???
+class ZipDataset   ### use (rename to) ZipDatasetWorker/Helper/Wrapper/Fetcher/Downloader - why, why not ???
   ## read dataset from zip(archive)
 
   include LogUtils::Logging
@@ -13,9 +13,7 @@ class ZipDataset   ### use(rename to) ZipDatasetWorker - why, why not ???
   end
 
   def remote_zip_url  # remote zip url
-    ###  note: use http:// for now - lets us use (personal proxy NOT working w/ https) for now
-    ## "https://github.com/#{@dataset.name}/archive/master.zip"
-    "http://github.com/#{@dataset.name}/archive/master.zip"
+    "https://github.com/#{@dataset.name}/archive/master.zip"
   end
 
   def local_zip_name
@@ -56,15 +54,14 @@ class ZipDataset   ### use(rename to) ZipDatasetWorker - why, why not ???
 
   def read
     if @dataset.is_a?( FootballDataset )
-      logger.info( "read football dataset (file) '#{@dataset.name}', '#{@dataset.setup}'" )
+      logger.info( "read football dataset (zip) '#{@dataset.name}', '#{@dataset.setup}'" )
 
-      ## pack = SportDb::ZipPackage.new( local_zip_path )
-      ## pack.read( season: @dataset.setup )   ##  note: pass on (optional) setup arg as season (filter) arg for now
+      pack = SportDb::ZipPackage.new( local_zip_path )
+      pack.read( season: @dataset.setup )   ##  note: pass on (optional) setup arg as season (filter) arg for now
     else
-      logger.info( "TODO/FIX: read dataset (file) '#{@dataset.name}', '#{@dataset.setup}'; sorry" )
+      logger.info( "TODO/FIX: read dataset (zip) '#{@dataset.name}', '#{@dataset.setup}'; sorry" )
     end
   end
-
 
 
 private

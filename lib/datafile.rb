@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'logutils'
+require 'fetcher'    ## add (HTTP/S) download support (of blobs/binaries/zips)
 
 
 # our own code

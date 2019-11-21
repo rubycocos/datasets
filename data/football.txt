@@ -24,21 +24,20 @@ openfootball/confed-cup
 # -- Clubs
 
 openfootball/clubs
+openfootball/world
 
-openfootball/eng-england
-openfootball/at-austria
-openfootball/de-deutschland
-openfootball/es-espana
-openfootball/it-italy
-openfootball/fr-france
-openfootball/ch-confoederatio-helvetica
+openfootball/england
+openfootball/austria
+openfootball/deutschland
+openfootball/espana
+openfootball/italy
+openfootball/france
 openfootball/europe-champions-league
 
-openfootball/major-league-soccer
-openfootball/mx-mexico
+openfootball/mexico
 openfootball/north-america-champions-league
 
-openfootball/br-brazil
+openfootball/brazil
 openfootball/copa-sudamericana
 openfootball/copa-libertadores
 
@@ -53,4 +52,3 @@ footballcsv/england
 footballcsv/deutschland
 
 ## todo/fix: add some more ...
-

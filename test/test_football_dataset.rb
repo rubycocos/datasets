@@ -12,13 +12,13 @@ class TestFootballDataset < MiniTest::Test
   def test_names
     pp Datafile::FootballDataset.known_datasets
 
-    at   = Datafile::FootballDataset.new( 'at-austria' )
-    at2  = Datafile::FootballDataset.new( 'openfootball/at-austria' )
+    at   = Datafile::FootballDataset.new( 'austria' )
+    at2  = Datafile::FootballDataset.new( 'openfootball/austria' )
     xxx  = Datafile::FootballDataset.new( 'xxx' )
     xxx2 = Datafile::FootballDataset.new( 'openfootball/xxx' )
 
-    assert_equal 'openfootball/at-austria', at.name
-    assert_equal 'openfootball/at-austria', at2.name
+    assert_equal 'openfootball/austria', at.name
+    assert_equal 'openfootball/austria', at2.name
 
     assert_equal 'openfootball/xxx', xxx.name
     assert_equal 'openfootball/xxx', xxx2.name
@@ -39,13 +39,13 @@ class TestFootballDataset < MiniTest::Test
   end
 
   def test_beer
-    at   = Datafile::BeerDataset.new( 'at-austria' )
-    at2  = Datafile::BeerDataset.new( 'openbeer/at-austria' )
+    at   = Datafile::BeerDataset.new( 'austria' )
+    at2  = Datafile::BeerDataset.new( 'openbeer/austria' )
     xxx  = Datafile::BeerDataset.new( 'xxx' )
     xxx2 = Datafile::BeerDataset.new( 'openbeer/xxx' )
 
-    assert_equal 'openbeer/at-austria', at.name
-    assert_equal 'openbeer/at-austria', at2.name
+    assert_equal 'openbeer/austria', at.name
+    assert_equal 'openbeer/austria', at2.name
 
     assert_equal 'openbeer/xxx', xxx.name
     assert_equal 'openbeer/xxx', xxx2.name

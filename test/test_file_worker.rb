@@ -23,14 +23,14 @@ class TestFileWorker < MiniTest::Test
     SportDb.create_all
 
     ## change worker (defaults to ZipWorker)
-    world_datafile.worker = Datafile::FileWorker.new( world_datafile )
+    world_datafile.worker = Datafile::FileWorker
     world_datafile.dump
 ##    world_datafile.read
 
     registry = Datafile::FileDataset.registry
     registry.merge( openfootball: '../../openfootball' )
 
-    eurocup_datafile.worker = Datafile::FileWorker.new( eurocup_datafile )
+    eurocup_datafile.worker = Datafile::FileWorker
     eurocup_datafile.dump
 ##    eurocup_datafile.read
 

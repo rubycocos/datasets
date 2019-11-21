@@ -13,10 +13,10 @@ class TestFileDatasetRegistry < MiniTest::Test
     registry = Datafile::FileDatasetRegistry.new
     registry.merge( openfootball: '../../openfootball' )
 
-    assert_equal '../../openfootball/at-austria', registry.lookup( 'openfootball/at-austria')
+    assert_equal '../../openfootball/austria',    registry.lookup( 'openfootball/austria')
     assert_equal '../../openmundi/world.db',      registry.lookup( 'openmundi/world.db' )
 
-    assert_equal '../../openfootball/at-austria', registry.lookup!( 'openfootball/at-austria')
+    assert_equal '../../openfootball/austria',    registry.lookup!( 'openfootball/austria')
     assert_equal '../../openmundi/world.db',      registry.lookup!( 'openmundi/world.db' )
 
     assert_equal '../../openfootball/national-teams', registry.lookup( 'openfootball/national-teams')
@@ -24,4 +24,3 @@ class TestFileDatasetRegistry < MiniTest::Test
   end
 
 end # class TestFileDatasetRegistry
-

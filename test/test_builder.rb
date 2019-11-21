@@ -15,7 +15,7 @@ class TestBuilder < MiniTest::Test
 
   world  'world.db', setup: 'countries'
 
-  football 'national-teams'      ## NOTE: default is setup: 'all'
+  football 'national-teams'      ## NOTE: default is setup: 'all
 
   ### todo/fix: download archive only once(!!) even if included more than once
   ## football 'world-cup', setup: '2014_quali'
@@ -29,14 +29,13 @@ EOS
     builder = Datafile::Builder.load( code )
 
     datafile = builder.datafile
-    ## datafile.run
-    ## datafile.download
-    ## datafile.read
+    datafile.run
 
+    datafile.download
+    datafile.read
     datafile.dump
 
     ## change worker (defaults to ZipWorker)
-    ## datafile.worker = Datafile::FileWorker.new( datafile )
     datafile.worker = Datafile::FileWorker
     datafile.dump
 
