@@ -10,7 +10,7 @@ require 'helper'
 class TestBuilder < MiniTest::Test
 
   def test_builder
-    code =<<EOS
+    code =<<TXT
 ## comments
 
   world  'world.db', setup: 'countries'
@@ -24,15 +24,15 @@ class TestBuilder < MiniTest::Test
 
 ## more comments
 
-EOS
+TXT
 
     builder = Datafile::Builder.load( code )
 
     datafile = builder.datafile
-    datafile.run
+    ## datafile.run
 
     datafile.download
-    datafile.read
+    ## datafile.read
     datafile.dump
 
     ## change worker (defaults to ZipWorker)

@@ -10,26 +10,33 @@ require 'helper'
 class TestFootballDataset < MiniTest::Test
 
   def test_names
-    pp Datafile::FootballDataset.known_datasets
+    pp FootballDataset.known_datasets
 
-    at   = Datafile::FootballDataset.new( 'austria' )
-    at2  = Datafile::FootballDataset.new( 'openfootball/austria' )
-    xxx  = Datafile::FootballDataset.new( 'xxx' )
-    xxx2 = Datafile::FootballDataset.new( 'openfootball/xxx' )
+    at   = FootballDataset.new( 'austria' )
+    at2  = FootballDataset.new( 'openfootball/austria' )
+    xxx  = FootballDataset.new( 'xxx' )
+    xxx2 = FootballDataset.new( 'openfootball/xxx' )
 
     assert_equal 'openfootball/austria', at.name
     assert_equal 'openfootball/austria', at2.name
 
     assert_equal 'openfootball/xxx', xxx.name
     assert_equal 'openfootball/xxx', xxx2.name
+
+    ## check csv format
+    at   = FootballDataset.new( 'austria', format: 'csv' )
+    at2  = FootballDataset.new( 'footballcsv/austria' )
+
+    assert_equal 'footballcsv/austria', at.name
+    assert_equal 'footballcsv/austria', at2.name
   end
 
   ## move to test datasets - why, why not ??
   def test_world
-    at   = Datafile::WorldDataset.new( 'austria.db' )
-    at2  = Datafile::WorldDataset.new( 'openmundi/austria.db' )
-    xxx  = Datafile::WorldDataset.new( 'xxx' )
-    xxx2 = Datafile::WorldDataset.new( 'openmundi/xxx' )
+    at   = WorldDataset.new( 'austria.db' )
+    at2  = WorldDataset.new( 'openmundi/austria.db' )
+    xxx  = WorldDataset.new( 'xxx' )
+    xxx2 = WorldDataset.new( 'openmundi/xxx' )
 
     assert_equal 'openmundi/austria.db', at.name
     assert_equal 'openmundi/austria.db', at2.name
@@ -39,10 +46,10 @@ class TestFootballDataset < MiniTest::Test
   end
 
   def test_beer
-    at   = Datafile::BeerDataset.new( 'austria' )
-    at2  = Datafile::BeerDataset.new( 'openbeer/austria' )
-    xxx  = Datafile::BeerDataset.new( 'xxx' )
-    xxx2 = Datafile::BeerDataset.new( 'openbeer/xxx' )
+    at   = BeerDataset.new( 'austria' )
+    at2  = BeerDataset.new( 'openbeer/austria' )
+    xxx  = BeerDataset.new( 'xxx' )
+    xxx2 = BeerDataset.new( 'openbeer/xxx' )
 
     assert_equal 'openbeer/austria', at.name
     assert_equal 'openbeer/austria', at2.name
