@@ -1,0 +1,9 @@
+HISTORY.md
+Manifest.txt
+README.md
+Rakefile
+lib/dataman.rb
+lib/dataman/dataman.rb
+lib/dataman/version.rb
+test/helper.rb
+test/test_sqlite.rb

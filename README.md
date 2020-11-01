@@ -2,8 +2,8 @@
 
 Gems:
 
-- [**datafile**](datafile)       - builder for downloading 'n' reading datasets
-
+- [**datafile**](datafile)  - builder for downloading 'n' reading datasets
+- [dataman](dataman)    - dataset manager using datafiles
 
 
 
