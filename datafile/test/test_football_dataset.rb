@@ -1,13 +1,11 @@
-# encoding: utf-8
-
 ###
 #  to run use
-#     ruby -I ./lib -I ./test test/test_football_dataset.rb
+#     ruby test/test_football_dataset.rb
 
 
-require 'helper'
+require_relative  'helper'
 
-class TestFootballDataset < MiniTest::Test
+class TestFootballDataset < Minitest::Test
 
   def test_names
     pp FootballDataset.known_datasets

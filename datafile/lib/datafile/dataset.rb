@@ -1,12 +1,10 @@
-# encoding: utf-8
-
 
 ############
 # fix: move global method to ??
 
 def read_known_datasets( path )
     ary = []
-    lines = File.open( path, 'r:utf-8' ).read
+    lines = File.open( path, 'r:utf-8' ) {|f| f.read }
     lines.each_line do |line|
       ## skip blank and comments lines
       next   if /^\s*#/ =~ line || /^\s*$/ =~ line

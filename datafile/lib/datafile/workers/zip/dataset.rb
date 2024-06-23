@@ -1,4 +1,3 @@
-# encoding: utf-8
 
 module Datafile
 
@@ -72,7 +71,7 @@ private
 
     ## make sure dest path exists
     dest_p = File.dirname( dest )
-    FileUtils.mkdir_p( dest_p )  unless File.exists?( dest_p )   ## use Dir.exists?? why? why not??
+    FileUtils.mkdir_p( dest_p )  unless File.exist?( dest_p )   ## use Dir.exist?? why? why not??
 
     worker = Fetcher::Worker.new
     worker.copy( url, dest )

@@ -1,13 +1,11 @@
-# encoding: utf-8
-
 ###
 #  to run use
-#     ruby -I ./lib -I ./test test/test_file_worker.rb
+#     ruby test/test_file_worker.rb
 
 
-require 'helper'
+require_relative 'helper'
 
-class TestFileWorker < MiniTest::Test
+class TestFileWorker < Minitest::Test
 
   def test_eurocup
 
@@ -18,9 +16,7 @@ class TestFileWorker < MiniTest::Test
     eurocup_datafile.dump
 
     # database setup 'n' config
-    ActiveRecord::Base.establish_connection( adapter:  'sqlite3',
-                                             database: ':memory:' )
-    SportDb.create_all
+    SportDb.open_mem
 
     ## change worker (defaults to ZipWorker)
     world_datafile.worker = Datafile::FileWorker
@@ -28,7 +24,7 @@ class TestFileWorker < MiniTest::Test
 ##    world_datafile.read
 
     registry = Datafile::FileDataset.registry
-    registry.merge( openfootball: '../../openfootball' )
+    registry.merge( openfootball: '../../../openfootball' )
 
     eurocup_datafile.worker = Datafile::FileWorker
     eurocup_datafile.dump

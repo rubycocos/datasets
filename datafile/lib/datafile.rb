@@ -1,11 +1,10 @@
-# encoding: utf-8
-
 require 'logutils'
 require 'fetcher'    ## add (HTTP/S) download support (of blobs/binaries/zips)
 
 
 # our own code
-require 'datafile/version'  # let it always go first
+require_relative 'datafile/version'  # let it always go first
+
 
 
 module Datafile
@@ -31,19 +30,19 @@ module Datafile
 end   # module Datafile
 
 
-require 'datafile/dataset'
-require 'datafile/builder'
+require_relative 'datafile/dataset'
+require_relative 'datafile/builder'
 
 
-require 'datafile/workers/file/registry'
-require 'datafile/workers/file/dataset'
-require 'datafile/workers/file/worker'
+require_relative 'datafile/workers/file/registry'
+require_relative 'datafile/workers/file/dataset'
+require_relative 'datafile/workers/file/worker'
 
-require 'datafile/workers/zip/dataset'
-require 'datafile/workers/zip/worker'
+require_relative 'datafile/workers/zip/dataset'
+require_relative 'datafile/workers/zip/worker'
 
-require 'datafile/datafile'
+require_relative 'datafile/datafile'
 
 
 # say hello
-puts Datafile.banner    if defined?($RUBYCOCO_DEBUG) && $RUBYCOCO_DEBUG
+puts Datafile.banner    ##  if defined?($RUBYCOCO_DEBUG) && $RUBYCOCO_DEBUG

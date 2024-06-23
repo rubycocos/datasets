@@ -1,11 +1,10 @@
-# encoding: utf-8
 
 module Datafile
 
 class Builder     ## "simple" builder (one file, one datafile)
 
   def self.load_file( path )
-    code = File.open( path, 'r:utf-8' ).read
+    code = File.open( path, 'r:utf-8' ) {|f| f.read }
     self.load( code )
   end
 

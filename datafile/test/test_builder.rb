@@ -1,13 +1,11 @@
-# encoding: utf-8
-
 ###
 #  to run use
-#     ruby -I ./lib -I ./test test/test_builder.rb
+#     ruby test/test_builder.rb
 
 
-require 'helper'
+require_relative  'helper'
 
-class TestBuilder < MiniTest::Test
+class TestBuilder < Minitest::Test
 
   def test_builder
     code =<<TXT

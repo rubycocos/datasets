@@ -1,4 +1,3 @@
-# encoding: utf-8
 
 module Datafile
 
@@ -7,7 +6,7 @@ class Datafile
 
   ## convenience method - use like Datafile.load_file()
   def self.load_file( path='./Datafile' )
-    code = File.open( path, 'r:utf-8' ).read
+    code = File.open( path, 'r:utf-8' ) { |f| f.read }
     self.load( code )
   end
 

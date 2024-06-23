@@ -2,8 +2,8 @@
 
 datafile gem - builder for downloading 'n' reading datasets
 
-* home  :: [github.com/rubylibs/datafile](https://github.com/rubylibs/datafile)
-* bugs  :: [github.com/rubylibs/datafile/issues](https://github.com/rubylibs/datafile/issues)
+* home  :: [github.com/rubycocos/datasets](https://github.com/rubycocos/datasets)
+* bugs  :: [github.com/rubycocos/datasets/issues](https://github.com/rubycocos/datasets/issues)
 * gem   :: [rubygems.org/gems/datafile](https://rubygems.org/gems/datafile)
 * rdoc  :: [rubydoc.info/gems/datafile](http://rubydoc.info/gems/datafile)
 
